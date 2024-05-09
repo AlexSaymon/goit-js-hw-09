@@ -1,9 +1,9 @@
-export const formData = {
+const formData = {
   email: '',
   message: '',
 };
 
-export const formRefs = {
+const formRefs = {
   form: document.querySelector(`.feedback-form`),
   input: document.querySelector('input[type="email"]'),
   textarea: document.querySelector('textarea'),
@@ -13,11 +13,11 @@ const { form, input, textarea } = formRefs;
 
 populateTextArea();
 
-export function onFormInput(event) {
+function onFormInput(event) {
   localStorage.setItem('feedback-form-state', event.target.value);
 }
 
-export function onFormSubmit(event) {
+function onFormSubmit(event) {
   event.preventDefault();
   const email = input.value;
   const message = textarea.value;
@@ -29,7 +29,7 @@ export function onFormSubmit(event) {
   localStorage.removeItem(`feedback-form-state`);
 }
 
-export function populateTextArea() {
+function populateTextArea() {
   const messageText = localStorage.getItem('feedback-form-state');
   if (messageText) {
     form.message.value = messageText;

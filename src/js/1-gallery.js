@@ -1,6 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-export const images = [
+const images = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
@@ -66,9 +66,8 @@ export const images = [
   },
 ];
 
-export const markup = images.reduce(
-  (html, { preview, original, description }) => {
-    return (html += `<li class="gallery-item">
+const markup = images.reduce((html, { preview, original, description }) => {
+  return (html += `<li class="gallery-item">
 	<a class="gallery-link" href="${original}">
 		<img 
 			class="gallery-image" 
@@ -77,11 +76,9 @@ export const markup = images.reduce(
 			/>
 	</a>
 </li>`);
-  },
-  ``
-);
+}, ``);
 
-export const imageListEl = document.querySelector(`.gallery`);
+const imageListEl = document.querySelector(`.gallery`);
 imageListEl.insertAdjacentHTML(`beforeend`, markup);
 
 const instance = new SimpleLightbox('.gallery a', {
