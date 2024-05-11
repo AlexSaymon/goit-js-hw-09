@@ -14,7 +14,9 @@ const { form, input, textarea } = formRefs;
 populateTextArea();
 
 function onFormInput(event) {
-  localStorage.setItem('feedback-form-state', event.target.value);
+  formData.email = input.value;
+  formData.message = textarea.value;
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
 
 function onFormSubmit(event) {
@@ -30,11 +32,14 @@ function onFormSubmit(event) {
 }
 
 function populateTextArea() {
-  const messageText = localStorage.getItem('feedback-form-state');
-  if (messageText) {
-    form.message.value = messageText;
+  const savedData = localStorage.getItem('feedback-form-state');
+  if (savedData) {
+    const { email, message } = JSON.parse(savedData);
+    input.value = email;
+    textarea.value = message;
   }
 }
 
-form.message.addEventListener(`input`, onFormInput);
+input.addEventListener(`input`, onFormInput);
+textarea.addEventListener(`input`, onFormInput);
 form.addEventListener(`submit`, onFormSubmit);
